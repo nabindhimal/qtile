@@ -1,0 +1,106 @@
+#####################
+# Application keybindings #
+#####################
+
+super + b
+    firefox-esr
+
+super + Return
+	kitty
+
+super + t
+	tilix
+    
+# super + k
+	# tilix
+
+# rofi launchers
+super + space
+	rofi -show drun
+	# rofi -modi run -show run -line-padding 4 -hide-scrollbar -show-icons
+   	
+# ctrl + space
+	# rofi -modi drun -show drun -line padding 4 -hide-scrollbar -show-icons
+	
+# rofi network manager	
+super + n
+	bash ~/bin/rofi-network-manager
+
+# logout, shutdown, reboot
+super + x
+	~/bin/power
+	
+alt + l
+	slock
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+# application launchers
+
+super + f
+    nautilus	
+
+super + e
+	geany
+
+alt + s
+	spotify
+
+super + d
+	gimp
+	
+super + c
+    cool-retro-term
+
+alt + k
+	xterm
+
+super + g
+	gnome-terminal
+
+super + o
+	obs
+
+alt + t
+	~/bin/time_date
+
+super + v
+    codium
+	
+## audio
+
+# Change volume, chunky
+# alt + k
+    # ~/bin/changevolume up
+    
+# alt + j
+	# ~/bin/changevolume down
+	
+super + shift + m
+	~/bin/changevolume mute
+
+#########
+# Scrot #
+#########
+super + alt + @s
+	scrot -s -e 'mv $f ~/Pictures/Screenshots'; \
+	notify-send 'Scrot' 'Selected image to ~/Pictures/Screenshots'
+
+super + s
+	scrot -e 'mv $f ~/Pictures/Screenshots'; \
+	notify-send 'Scrot' 'Image saved to ~/Pictures/Screenshots'
+	
+## redshift
+super + alt + r
+	~/bin/redshift-on
+	
+super + alt + b
+	~/bin/redshift-off
+
+
+## Show clipmenu
+alt + v
+    CM_LAUNCHER=rofi clipmenu 
+    
+
+ 
