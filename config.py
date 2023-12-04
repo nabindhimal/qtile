@@ -1,42 +1,12 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 import os
 import subprocess
-
 from libqtile import hook
-
-
-
 from libqtile.config import Key
 from libqtile.command import lazy
+from libqtile.widget import Mpd2
 
 
 @hook.subscribe.startup_once
@@ -45,14 +15,9 @@ def autostart():
     subprocess.Popen([home])
 
 mod = "mod4"
-#terminal = guess_terminal()
-"""
-Color schemes live here
-"""
 
 catppuccin = {
     "flamingo": "#F2CDCD",
-    # "mauve": "#DDB6F2",
     "mauve": "#cba6f7",
     "pink": "#f5c2e7",
     "maroon": "#e8a2af",
@@ -67,37 +32,6 @@ catppuccin = {
     "gray": "#6e6c7e",
     "black": "#1a1826",
         }
-
-
-
-
-
-_jagl = {
-	'bg':   		'#1e1e2e',
-	'fg':			'#cdd6f4',
-    'dark-red':     '#eba0ac',
-    'red':          '#f38ba8',
-    'dark-green':   '#94e2d5',
-    'green':        '#a6e3a1',
-    'dark-yellow':  '#fab387',
-    'yellow':       '#f9e2af',
-    'dark-blue':    '#74c7ec',
-    'blue':         '#89b4fa',
-    'dark-magenta': '#cba6f7',
-    'magenta':      '#f5c2e7',
-    'dark-cyan':    '#94e2d5',
-    'cyan':         '#89dceb',
-    'dark-gray':    '#7f849c',
-    'gray':         '#9399b2',
-
-    'fg4':          '#7f849c',
-    'fg3':          '#6c7086',
-    'fg2':          '#585b70',
-    'fg1':          '#45475a',
-    'bg0':          '#313244',
-    'fg0':          '#181825',
-    'fg9':          '#bac2de'
-}
 
 _gruvbox = {
     'bg':           '#282828',
@@ -130,20 +64,14 @@ color_schema = _gruvbox
 
 
 keys = [
-           # ...
 
     # Decrease brightness
-    Key([], "XF86MonBrightnessDown", lazy.spawn("light -U 10")),
+    # Key([], "XF86MonBrightnessDown", lazy.spawn("light -U 10")),
 
     # Increase brightness
-    Key([], "XF86MonBrightnessUp", lazy.spawn("light -A 10")),
-
-    # ...
+    # Key([], "XF86MonBrightnessUp", lazy.spawn("light -A 10")),
 
 
-
-
-  # ...
 
     # Decrease volume
     Key([], "XF86AudioLowerVolume", lazy.spawn("/home/mennnk/bin/changevolume down")),
@@ -151,21 +79,6 @@ keys = [
     # Increase volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn("/home/mennnk/bin/changevolume up")),
 
-
-    # ...
-
-
-
-
-
-
-
-
-
-
-
-
-# Add dedicated sxhkdrc to autostart.sh script
 
 # CLOSE WINDOW, RELOAD AND QUIT QTILE
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -254,37 +167,9 @@ keys = [
 # end of keys
 groups = [Group(i) for i in ["", "", "", "", "󰄛", "", "", "", ""]]
 
-#groups = [Group(i) for i in ["", "", "", "", "阮", "", "", "", ""]]
-# groups = [Group(i) for i in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]]
 group_hotkeys = "123456789"
 group_keys = [str(i) for i in range(1, 10)]
 
-# for i in groups:
-#     keys.extend(
-#         [
-#             # mod1 + letter of group = switch to group
-#             Key(
-#                 [mod],
-#                 i.name,
-#                 lazy.group[i.name].toscreen(),
-#                 desc="Switch to group {}".format(i.name),
-#             ),
-#             # mod1 + shift + letter of group = switch to & move focused window to group
-#             Key(
-#                 [mod, "shift"],
-#                 i.name,
-#                 lazy.window.togroup(i.name, switch_group=True),
-#                 desc="Switch to & move focused window to group {}".format(i.name),
-#             ),
-#             # Or, use below if you prefer not to switch to that group.
-#             # # mod1 + shift + letter of group = move focused window to group
-#             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-#             #     desc="move focused window to group {}".format(i.name)),
-#         ]
-#     )
-
-
-## new workspace changer
 
 for i, key in enumerate(group_keys):
     keys.extend(
